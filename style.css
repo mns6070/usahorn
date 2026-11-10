@@ -22,3 +22,5 @@ main{padding-top:22px;padding-bottom:40px;min-height:60vh}h1{font-size:32px;line
 .desc img,.prose img{margin:8px 0}.prose{max-width:820px}.posts li{margin:8px 0}
 footer{background:var(--dark);color:#d9c79f;font-family:Arial,sans-serif;font-size:15px;padding:24px 0 8px}footer a{color:#f4ead6}footer h3{color:#fff;margin:0 0 6px}.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}.copy{padding-top:14px;font-size:13px;color:#a99d85}
 @media(max-width:760px){.product{grid-template-columns:1fr}.contact{text-align:left}.menu{display:block}header nav ul{display:none;flex-direction:column}header nav ul.open{display:flex}.b1{font-size:26px}h1{font-size:27px}}
+
+header nav a[aria-current=page]{background:var(--accent);color:#fff}

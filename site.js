@@ -11,6 +11,9 @@ fetch('/shop/data.json').then(function(r){return r.json()}).then(function(data){
  opts(el.type,'ty');opts(el.brand,'v');
  ['q','cond','type','brand','sort'].forEach(function(k){if(qs.get(k))el[k].value=qs.get(k)});
  if(qs.get('avail')==='0')el.avail.checked=false;
+ var heads={Used:['Used & Vintage','Pre-owned and vintage instruments, each one inspected and described by a player.'],New:['New & Modern','New and current model instruments.'],Accessory:['Accessories','Reeds, mouthpieces, cases and stands.']};
+ var h=heads[qs.get('cond')];if(h){document.getElementById('shophead').textContent=h[0];document.getElementById('shopsub').textContent=h[1];document.title=h[0]+' | USA Horn, Inc.';}
+ document.querySelectorAll('header nav a').forEach(function(a){if(a.getAttribute('href')==='/shop/?cond='+qs.get('cond')){a.setAttribute('aria-current','page')}});
  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
  function render(){
   var q=el.q.value.toLowerCase().trim(),out=data.filter(function(d){
