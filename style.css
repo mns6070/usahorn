@@ -37,7 +37,7 @@ header nav li.has-sub.open>ul.sub{display:flex}header nav li.has-sub.open>ul.sub
 header nav ul.sub,header nav ul.sub.wide{position:static;min-width:0;width:100%;box-shadow:none;columns:1;border-top:0;background:#170553}header nav ul.sub a{white-space:normal;padding-left:28px}}
 header nav a[aria-current=page]{background:var(--accent);color:#fff}
 
-.wideprose{max-width:none}.hero{width:100%;max-height:260px;object-fit:cover;border-radius:6px;display:block;margin:0 0 14px}
+.wideprose{max-width:none}.pagehero{width:100%;max-height:260px;object-fit:cover;border-radius:6px;display:block;margin:0 0 14px}
 .accgrid{list-style:none;padding:0;margin:8px 0 22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
 .accgrid li{text-align:center;font-family:Arial,sans-serif;font-weight:bold;font-size:15px}.accgrid .ai{height:150px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}.accgrid .ai img{max-height:150px;max-width:100%;margin:0;object-fit:contain}
 .accgrid li span{display:block}
@@ -103,3 +103,7 @@ footer h2,footer h3,footer h4{color:#fff}
 .filters select{min-width:190px}.filters input[type=search]{min-width:220px}
 @media(max-width:760px){.filters select,.filters input[type=search]{min-width:0}}
 #results:empty{min-height:120vh}
+footer h2{font-size:1.17em;margin:1em 0;line-height:1.2}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:560px){.accgrid{grid-template-columns:repeat(2,1fr);gap:12px}.accgrid .ai{height:120px}.accgrid .ai img{max-height:120px}.accgrid li{font-size:14px}}
+@media(max-width:760px){main.productpage~footer{padding-bottom:96px}}
