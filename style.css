@@ -99,3 +99,7 @@ header nav a:hover,header nav a:focus,header nav a[aria-current=page]{background
 header nav ul.sub a:hover{background:#e8b050;color:#23087c}
 .bulletin{border-left-color:#e8b050}
 footer h2,footer h3,footer h4{color:#fff}
+/* stable filter widths so labels do not jump when options load */
+.filters select{min-width:190px}.filters input[type=search]{min-width:220px}
+@media(max-width:760px){.filters select,.filters input[type=search]{min-width:0}}
+#results:empty{min-height:120vh}
