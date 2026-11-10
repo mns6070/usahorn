@@ -142,3 +142,10 @@ footer h2{font-size:1.17em;margin:1em 0;line-height:1.2}
 .lightbox .gbtn{margin-top:-22px}
 body.lbopen{overflow:hidden}
 @media(max-width:560px){.gzoom{height:32px;padding:0 11px;font-size:13px}.gbtn{width:40px;height:40px;margin-top:-20px;font-size:24px}}
+/* long dropdowns scroll instead of running down the page */
+header nav ul.sub,header nav ul.sub.wide{max-height:min(65vh,440px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#e8b050 #170553}
+header nav ul.sub.wide{columns:auto;column-count:auto;column-width:auto;min-width:250px}
+header nav ul.sub{background:linear-gradient(#170553 30%,rgba(23,5,83,0)) center top,linear-gradient(rgba(23,5,83,0),#170553 70%) center bottom,radial-gradient(farthest-side at 50% 0,rgba(232,176,80,.55),rgba(232,176,80,0)) center top,radial-gradient(farthest-side at 50% 100%,rgba(232,176,80,.55),rgba(232,176,80,0)) center bottom;background-color:#170553;background-repeat:no-repeat;background-size:100% 36px,100% 36px,100% 12px,100% 12px;background-attachment:local,local,scroll,scroll}
+header nav ul.sub::-webkit-scrollbar{width:10px}header nav ul.sub::-webkit-scrollbar-track{background:#170553}header nav ul.sub::-webkit-scrollbar-thumb{background:#e8b050;border-radius:5px;border:2px solid #170553}
+@media(max-width:760px){header nav ul.sub,header nav ul.sub.wide{max-height:50vh;min-width:0;columns:auto}}
+header nav ul.sub>li{flex-shrink:0}
