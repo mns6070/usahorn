@@ -122,5 +122,5 @@ footer h2{font-size:1.17em;margin:1em 0;line-height:1.2}
 @media(prefers-reduced-motion:reduce){.slides .slide{transition:none}}
 /* wide shop photo: full image over a blurred copy of itself */
 .slides .slide.wide{background:#170553}
-.slides .slide.wide::before{content:"";position:absolute;inset:-24px;background:url(/img/c/f5e70782e664.jpg) center/cover;filter:blur(20px) brightness(.55)}
+.slides .slide.wide.seen::before{content:"";position:absolute;inset:-24px;background:url(/img/c/f5e70782e664.jpg) center/cover;filter:blur(20px) brightness(.55)}
 .slides .slide.wide img{position:relative;object-fit:contain}
