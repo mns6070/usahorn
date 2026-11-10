@@ -43,3 +43,9 @@ header nav a[aria-current=page]{background:var(--accent);color:#fff}
 .accgrid li span{display:block}
 
 footer a:hover,footer a:focus{color:#fff;text-decoration:underline}
+
+table.prices{border-collapse:collapse;width:100%;max-width:520px;margin:12px 0 22px;background:#fff;border:1px solid var(--line);border-radius:6px;font-family:Arial,sans-serif;font-size:16px}
+table.prices caption{caption-side:top;text-align:left;font-family:Georgia,serif;font-weight:bold;font-size:22px;padding:0 0 8px}
+table.prices th,table.prices td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:baseline}
+table.prices th{text-align:left;font-weight:normal}table.prices td{text-align:right;font-weight:bold;color:var(--brass);white-space:nowrap}
+table.prices tr:last-child th,table.prices tr:last-child td{border-bottom:0}table.prices tr:nth-child(even){background:#faf6ec}
