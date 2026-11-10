@@ -1,0 +1,15 @@
+/products/king-super-21 /products/king-super-20/ 301
+/collections/:c/products/:p /products/:p/ 301
+/collections/* /shop/ 301
+/products/:slug /products/:slug/ 301
+/pages/location /contact/ 301
+/pages/contact-us /contact/ 301
+/pages/:slug /:slug/ 301
+/blogs/news /blog/ 301
+/blogs/news/usa-horn-moves /blog/usa-horn-moves/ 301
+/blogs/news/quick-video-of-mark-hard-at-work /blog/quick-video-of-mark-hard-at-work/ 301
+/blogs/news/11440017-usa-horn-featured-in-musical-merchandise-review /blog/usa-horn-featured-in-musical-merchandise-review/ 301
+/blogs/* /blog/ 301
+/cart /shop/ 301
+/account* /contact/ 301
+/search /shop/ 301
