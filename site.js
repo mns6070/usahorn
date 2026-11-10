@@ -1,6 +1,8 @@
 (function(){
 var btn=document.querySelector('.menu'),ul=document.getElementById('navlist');
 if(btn&&ul)btn.addEventListener('click',function(){var o=ul.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+document.querySelectorAll('.subtoggle').forEach(function(b){b.addEventListener('click',function(){var li=b.parentNode,o=li.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.has-sub.open').forEach(function(l){l.classList.remove('open')})});
 var main=document.getElementById('mainimg');
 if(main)document.querySelectorAll('.thumbs a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();main.src=a.getAttribute('href')})});
 var res=document.getElementById('results');if(!res)return;
