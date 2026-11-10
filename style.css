@@ -41,3 +41,5 @@ header nav a[aria-current=page]{background:var(--accent);color:#fff}
 .accgrid{list-style:none;padding:0;margin:8px 0 22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
 .accgrid li{text-align:center;font-family:Arial,sans-serif;font-weight:bold;font-size:15px}.accgrid .ai{height:150px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}.accgrid .ai img{max-height:150px;max-width:100%;margin:0;object-fit:contain}
 .accgrid li span{display:block}
+
+footer a:hover,footer a:focus{color:#fff;text-decoration:underline}
