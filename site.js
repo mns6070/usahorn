@@ -6,25 +6,43 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')document.que
 var main=document.getElementById('mainimg');
 if(main)document.querySelectorAll('.thumbs a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();main.src=a.getAttribute('href')})});
 var res=document.getElementById('results');if(!res)return;
-var qs=new URLSearchParams(location.search),ids=['q','cond','type','brand','sort'],el={};
-ids.concat('avail').forEach(function(i){el[i]=document.getElementById(i)});
+var qs=new URLSearchParams(location.search),el={},PAGE=24,limit=PAGE;
+['q','cond','type','brand','sort','avail'].forEach(function(i){el[i]=document.getElementById(i)});
+var form=document.getElementById('filters'),tog=document.getElementById('ftoggle'),more=document.getElementById('more');
+tog.addEventListener('click',function(){var o=form.classList.toggle('open');tog.setAttribute('aria-expanded',o)});
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 fetch('/shop/data.json').then(function(r){return r.json()}).then(function(data){
  function opts(sel,key){var v=Array.from(new Set(data.map(function(d){return d[key]}))).filter(Boolean).sort();v.forEach(function(x){var o=document.createElement('option');o.textContent=x;sel.appendChild(o)})}
  opts(el.type,'ty');opts(el.brand,'v');
  ['q','cond','type','brand','sort'].forEach(function(k){if(qs.get(k))el[k].value=qs.get(k)});
  if(qs.get('avail')==='0')el.avail.checked=false;
- var heads={Used:['Used & Vintage','Pre-owned and vintage instruments, each one inspected and described by a player.'],New:['New & Modern','New and current model instruments.'],Accessory:['Accessories','Reeds, mouthpieces, cases and stands.']};
+ var heads={Used:['Used & Vintage','Pre-owned and vintage instruments, each one described by a player.'],New:['New & Modern','New and current model instruments.'],Accessory:['Accessories','Reeds, mouthpieces, cases and stands.']};
  var h=heads[qs.get('cond')];if(h){document.getElementById('shophead').textContent=h[0];document.getElementById('shopsub').textContent=h[1];document.title=h[0]+' | USA Horn, Inc.';}
- document.querySelectorAll('header nav a').forEach(function(a){if(a.getAttribute('href')==='/shop/?cond='+qs.get('cond')){a.setAttribute('aria-current','page')}});
- function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
- function render(){
-  var q=el.q.value.toLowerCase().trim(),out=data.filter(function(d){
-   return (!q||(d.t+' '+d.v).toLowerCase().indexOf(q)>-1)&&(!el.cond.value||d.c===el.cond.value)&&(!el.type.value||d.ty===el.type.value)&&(!el.brand.value||d.v===el.brand.value)&&(!el.avail.checked||d.a)});
-  var s=el.sort.value;if(s==='lo')out.sort(function(a,b){return a.p-b.p});if(s==='hi')out.sort(function(a,b){return b.p-a.p});if(s==='az')out.sort(function(a,b){return a.t.localeCompare(b.t)});
-  document.getElementById('count').textContent=out.length+' item'+(out.length===1?'':'s');
-  res.innerHTML=out.map(function(d){return '<a class="card" href="/products/'+esc(d.h)+'/"><div class="ph">'+(d.im?'<img src="'+esc(d.im)+'" alt="'+esc(d.t)+'" loading="lazy">':'<div class="noimg">No photo</div>')+(d.a?'':'<span class="tag sold">Sold</span>')+'</div><div class="ct"><h3>'+esc(d.t)+'</h3><p class="pr">'+esc(d.pt)+'</p></div></a>'}).join('');
+ document.querySelectorAll('header nav a').forEach(function(a){if(qs.get('cond')&&a.getAttribute('href')==='/shop/?cond='+qs.get('cond')){a.setAttribute('aria-current','page')}});
+ function card(d){
+  var img=d.im?'<img src="'+esc(d.im)+'" alt="'+esc(d.t)+'" loading="lazy">':'<div class="noimg">Photos coming soon</div>';
+  var pr=d.p>0?'<p class="pr">'+esc(d.pt)+'</p>':'<p class="pr call">Call for price</p>';
+  return '<a class="card" href="/products/'+esc(d.h)+'/"><div class="ph">'+img+(d.a?'':'<span class="tag sold">Sold</span>')+'</div><div class="ct"><h3>'+esc(d.t)+'</h3>'+(d.d?'<p class="dt">'+esc(d.d)+'</p>':'')+pr+'</div></a>';
  }
- ['q','cond','type','brand','sort','avail'].forEach(function(k){el[k].addEventListener('input',render)});
- render();
+ function render(reset){
+  if(reset)limit=PAGE;
+  var q=el.q.value.toLowerCase().trim(),out=data.filter(function(d){
+   return (!q||(d.t+' '+d.v+' '+d.d).toLowerCase().indexOf(q)>-1)&&(!el.cond.value||d.c===el.cond.value)&&(!el.type.value||d.ty===el.type.value)&&(!el.brand.value||d.v===el.brand.value)&&(!el.avail.checked||d.a)});
+  var s=el.sort.value;
+  if(s==='lo')out.sort(function(a,b){return (a.p>0?a.p:1e9)-(b.p>0?b.p:1e9)});
+  else if(s==='hi')out.sort(function(a,b){return b.p-a.p});
+  else if(s==='az')out.sort(function(a,b){return a.t.localeCompare(b.t)});
+  else out.sort(function(a,b){return (a.im?0:1)-(b.im?0:1)});
+  var shown=out.slice(0,limit),n=0;
+  ['cond','type','brand'].forEach(function(k){if(el[k].value)n++});if(s!=='new')n++;if(!el.avail.checked)n++;
+  tog.textContent='Filters'+(n?' ('+n+')':'');
+  document.getElementById('count').textContent=out.length+' item'+(out.length===1?'':'s');
+  res.innerHTML=shown.map(card).join('');
+  document.getElementById('shown').textContent=out.length>shown.length?'Showing '+shown.length+' of '+out.length:'';
+  more.hidden=out.length<=shown.length;
+ }
+ more.addEventListener('click',function(){limit+=PAGE;render(false)});
+ ['q','cond','type','brand','sort','avail'].forEach(function(k){el[k].addEventListener('input',function(){render(true)})});
+ render(true);
 });
 })();
