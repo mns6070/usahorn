@@ -111,3 +111,13 @@ box={img:img,count:c}}
 zoom.addEventListener('click',open);main.addEventListener('click',open);
 show(0);
 })();
+
+(function(){
+var g=document.getElementById('featured');if(!g)return;
+var cards=[].slice.call(g.children),pin=parseInt(g.getAttribute('data-pinned'),10)||0,SHOW=8;
+if(cards.length<=SHOW)return;
+var rest=cards.slice(pin);
+for(var k=rest.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=rest[k];rest[k]=rest[r];rest[r]=t}
+var order=cards.slice(0,pin).concat(rest);
+order.forEach(function(c,n){if(n<SHOW)c.removeAttribute('hidden');else c.setAttribute('hidden','');g.appendChild(c)});
+})();

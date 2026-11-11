@@ -149,3 +149,5 @@ header nav ul.sub{background:linear-gradient(#170553 30%,rgba(23,5,83,0)) center
 header nav ul.sub::-webkit-scrollbar{width:10px}header nav ul.sub::-webkit-scrollbar-track{background:#170553}header nav ul.sub::-webkit-scrollbar-thumb{background:#e8b050;border-radius:5px;border:2px solid #170553}
 @media(max-width:760px){header nav ul.sub,header nav ul.sub.wide{max-height:50vh;min-width:0;columns:auto}}
 header nav ul.sub>li{flex-shrink:0}
+
+.grid>[hidden]{display:none!important}
