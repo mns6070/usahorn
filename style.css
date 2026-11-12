@@ -151,3 +151,4 @@ header nav ul.sub::-webkit-scrollbar{width:10px}header nav ul.sub::-webkit-scrol
 header nav ul.sub>li{flex-shrink:0}
 
 .grid>[hidden]{display:none!important}
+header nav ul.sub{flex-wrap:nowrap}
